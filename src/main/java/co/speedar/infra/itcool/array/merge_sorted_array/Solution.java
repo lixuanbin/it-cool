@@ -4,22 +4,32 @@ import java.util.Arrays;
 
 class Solution {
 	public void merge(int[] nums1, int m, int[] nums2, int n) {
-		int[] twin1 = new int[m];
-		System.arraycopy(nums1, 0, twin1, 0, m);
-		int i = 0, j = 0, k = 0;
-		while (i < m && j < n) {
-			if (twin1[i] < nums2[j]) {
-				nums1[k++] = twin1[i++];
+		if (n <= 0) {
+			return;
+		}
+		if (m <= 0) {
+			System.arraycopy(nums2, 0, nums1, 0, n);
+			return;
+		}
+		// 把nums1原来到拷贝到后半截，腾出空间用来合并
+		System.arraycopy(nums1, 0, nums1, n, m);
+		int i = n, j = 0, k = 0;
+		while (i < n + m && j < n) {
+			if (nums1[i] <= nums2[j]) {
+				nums1[k++] = nums1[i];
+				i++;
 			} else {
 				nums1[k++] = nums2[j++];
 			}
 		}
+		// 处理左右两边可能的剩余数据
+		if (i < n + m) {
+			System.arraycopy(nums1, i, nums1, k, n + m - i);
+		}
 		if (j < n) {
-			System.arraycopy(nums2, j, nums1, k, m + n - k);
+			System.arraycopy(nums2, j, nums1, k, n - j);
 		}
-		if (i < m) {
-			System.arraycopy(twin1, i, nums1, k, m + n - k);
-		}
+		// 引申问题：k路合并时候的处理和时间复杂度推导
 	}
 
 	public static void main(String[] args) {

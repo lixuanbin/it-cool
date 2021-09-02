@@ -55,7 +55,7 @@ public class TopK {
 			this.boundary = boundary;
 		}
 
-		// 重写入列方法
+		// 重写入列方法，实现有界优先队列
 		@Override
 		public boolean add(E o) {
 			if (size() < boundary) {
