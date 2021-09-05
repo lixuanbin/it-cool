@@ -32,16 +32,18 @@ public class MergeSort {
 		while (rs <= r) {
 			temp[i++] = a[rs++];
 		}
-		for (int j = l; j <= r; j++) {
-			a[j] = temp[j];
+		if (r + 1 - l >= 0) {
+			System.arraycopy(temp, l, a, l, r + 1 - l);
 		}
 	}
 
 	public static void main(String[] args) {
-		int[] a = {1, 3, 5, 4, 6, 2};
+		// int[] a = {1, 3, 5, 4, 6, 2};
+		int[] a = SortHelper.getInstance().generateRandomIntArray();
 		new MergeSort().mergeSort(a);
-		for (int i : a) {
+		/*for (int i : a) {
 			System.out.println(i);
-		}
+		}*/
+		System.out.println(SortHelper.getInstance().validateSort(a));
 	}
 }

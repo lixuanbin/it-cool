@@ -1,4 +1,4 @@
-package co.speedar.infra.itcool.sort;
+package co.speedar.infra.itcool.search;
 
 import java.util.Arrays;
 import java.util.Comparator;

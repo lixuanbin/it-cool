@@ -5,7 +5,6 @@ public class QuickSort {
 	// 算法过程：
 	// 选择pivot
 	// 然后递归地对左右两边调用qsort
-	// partition函数的编写？
 
 	public void qsort(int[] array, int start, int end) {
 		if (start < end) {

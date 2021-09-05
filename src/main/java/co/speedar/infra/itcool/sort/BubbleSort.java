@@ -1,17 +1,16 @@
 package co.speedar.infra.itcool.sort;
 
-public class SelectionSort {
+public class BubbleSort {
 	public void sort(int[] arr) {
+		if (arr == null || arr.length < 2) {
+			return;
+		}
 		for (int i = 0; i < arr.length - 1; i++) {
-			int min = arr[i];
-			int minIndex = i;
 			for (int j = i + 1; j < arr.length; j++) {
-				if (arr[j] < min) {
-					min = arr[j];
-					minIndex = j;
+				if (arr[i] > arr[j]) {
+					swap(arr, i, j);
 				}
 			}
-			swap(arr, i, minIndex);
 		}
 	}
 
@@ -22,13 +21,13 @@ public class SelectionSort {
 	}
 
 	public static void main(String[] args) {
-		// int[] arr = {1, 3, 9, 6, 7};
+		// int[] arr = {1, 4, 3, 2, 5};
 		int[] arr = SortHelper.getInstance().generateRandomIntArray();
-		SelectionSort sort = new SelectionSort();
-		sort.sort(arr);
-		/*for (int i : arr) {
-			System.out.println(i);
-		}*/
+		BubbleSort bubbleSort = new BubbleSort();
+		bubbleSort.sort(arr);
 		System.out.println(SortHelper.getInstance().validateSort(arr));
+        /*for (int i : arr) {
+            System.out.println(i);
+        }*/
 	}
 }
