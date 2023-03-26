@@ -1,7 +1,7 @@
 package co.speedar.infra.itcool.sort;
 
-public class MergeSort {
-	public void mergeSort(int[] a) {
+public class MergeSort implements Sort {
+	public void sort(int[] a) {
 		mergeSort(a, new int[a.length], 0, a.length - 1);
 	}
 
@@ -40,7 +40,7 @@ public class MergeSort {
 	public static void main(String[] args) {
 		// int[] a = {1, 3, 5, 4, 6, 2};
 		int[] a = SortHelper.getInstance().generateRandomIntArray();
-		new MergeSort().mergeSort(a);
+		new MergeSort().sort(a);
 		/*for (int i : a) {
 			System.out.println(i);
 		}*/

@@ -1,5 +1,6 @@
 package co.speedar.infra.itcool.sort;
 
+import java.util.Arrays;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class SortHelper {
@@ -64,6 +65,10 @@ public class SortHelper {
 		int temp = arr[i];
 		arr[i] = arr[j];
 		arr[j] = temp;
+	}
+
+	public void printArray(int[] arr) {
+		System.out.println(Arrays.toString(arr)); // NOSONAR
 	}
 
 	public enum Order {

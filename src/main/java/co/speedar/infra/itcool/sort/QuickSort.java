@@ -1,40 +1,59 @@
 package co.speedar.infra.itcool.sort;
 
-// untested
-public class QuickSort {
-	// 算法过程：
-	// 选择pivot
-	// 然后递归地对左右两边调用qsort
+public class QuickSort implements Sort {
+	public void sort(int[] arr) {
+		qsort(arr, 0, arr.length - 1);
+	}
 
-	public void qsort(int[] array, int start, int end) {
-		if (start < end) {
-			int pivot = partition(array, 0, array.length - 1);
-			qsort(array, 0, pivot - 1);
-			qsort(array, pivot + 1, end);
+	public void qsort(int[] arr, int l, int r) {
+		if (l < r) {
+			int pivot = partition(arr, l, r);
+			qsort(arr, l, pivot - 1);
+			qsort(arr, pivot, r);
 		}
 	}
 
-	public int partition(int[] array, int start, int end) {
-		int pivot = array[end];
-		int left = start - 1; // 左边
-		// 选择最后一个做主元，从0到end-1跟主元比，小的放左边，大的放右边，最后再把主元放回中间
-		for (int right = 0; right < end; right++) {
-			if (array[right] < pivot) {
-				left++;
-				swap(array, left, right);
+	public int partition(int[] arr, int l, int r) {
+		// 三数取中值，尽量避免最坏情况
+		int m = (l + r) / 2;
+		if (arr[l] > arr[m]) {
+			SortHelper.getInstance().swap(arr, l, m);
+		}
+		if (arr[m] > arr[r]) {
+			SortHelper.getInstance().swap(arr, m, r);
+		}
+		if (arr[l] > arr[r]) {
+			SortHelper.getInstance().swap(arr, l, r);
+		}
+		// 把主元放回最左边
+		SortHelper.getInstance().swap(arr, l, m);
+		int i = l + 1;
+		int j = r;
+		int middle = arr[l];
+		while (i < j) {
+			while (arr[j] > middle && j > i) {
+				j--;
 			}
+			while (arr[i] < middle && i < j) {
+				i++;
+			}
+			SortHelper.getInstance().swap(arr, i, j);
 		}
-		swap(array, left + 1, end);
-		return left + 1;
-	}
-
-	private void swap(int[] array, int a, int b) {
-		int tmp = array[a];
-		array[a] = array[b];
-		array[b] = tmp;
+		if (arr[l] > arr[i]) {
+			SortHelper.getInstance().swap(arr, l, i);
+		}
+		return i;
 	}
 
 	public static void main(String[] args) {
-
+		QuickSort quickSort = new QuickSort();
+		int[] arr = SortHelper.getInstance().generateRandomIntArray(9, 9);
+		SortHelper.getInstance().printArray(arr);
+        /*int pivot = quickSort.partition(arr, 0, arr.length - 1);
+        System.out.println("pivot: " + pivot);
+        SortHelper.getInstance().printArray(arr);*/
+		quickSort.sort(arr);
+		SortHelper.getInstance().printArray(arr);
+		System.out.println(SortHelper.getInstance().validateSort(arr));
 	}
 }

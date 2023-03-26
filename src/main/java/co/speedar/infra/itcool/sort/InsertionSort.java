@@ -1,6 +1,6 @@
 package co.speedar.infra.itcool.sort;
 
-public class InsertionSort {
+public class InsertionSort implements Sort {
 	public void sort(int[] arr) {
 		for (int i = 1; i < arr.length; i++) {
 			int temp = arr[i];

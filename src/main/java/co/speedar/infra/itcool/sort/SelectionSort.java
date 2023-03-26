@@ -1,6 +1,6 @@
 package co.speedar.infra.itcool.sort;
 
-public class SelectionSort {
+public class SelectionSort implements Sort {
 	public void sort(int[] arr) {
 		for (int i = 0; i < arr.length - 1; i++) {
 			int min = arr[i];
